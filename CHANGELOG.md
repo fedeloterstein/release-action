@@ -2,6 +2,18 @@
 
 ---
 
+## [2.0.0](https://github.com/fedeloterstein/release-action/compare/v1.3.0...v2.0.0) (2023-04-06)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove file
+
+### ✨ Features
+
+* add file test ([b932bad](https://github.com/fedeloterstein/release-action/commit/b932bad9b947ac7f2809c4cad4a9a4f7832ed0b8))
+* remove file ([a5e4634](https://github.com/fedeloterstein/release-action/commit/a5e463411b4171476c975061d2bd9770c104ae84))
+
 ## [1.3.0](https://github.com/fedeloterstein/release-action/compare/v1.2.0...v1.3.0) (2023-04-06)
 
 
