@@ -62,11 +62,14 @@ jobs:
           NODE_ENV: 'test'
 
       - name: "🏷️ Create Release"
+        id: latesTag
         run: |
           git config --global user.name "GitHub CI/CD bot"
           git config --global user.email "${GITHUB_EMAIL}"
           yarn release     
           git push --follow-tags origin main
+          tag=$(git describe --tags $(git rev-list --tags --max-count=1))
+          echo "::set-output name=latestag::$tag"
 
       - name: "📄 Create Changelog"
         uses: Bullrich/generate-release-changelog@master
@@ -74,11 +77,11 @@ jobs:
         env:
           REPO: ${{ github.repository }}
 
-      - name: "🚀 Publish Release"
+      - name: "🚀 Publish Release: ${{steps.latesTag.outputs.latestag}}"
         uses: actions/create-release@v1
         with:
-          tag_name: "v1"
-          release_name: "v1"
+          tag_name: "${{steps.latesTag.outputs.latestag}}"
+          release_name: "${{steps.latesTag.outputs.latestag}}"
           body: |
             ${{ steps.Changelog.outputs.changelog }}
             
