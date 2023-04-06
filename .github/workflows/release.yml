@@ -1,0 +1,102 @@
+name: "Release"
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  GITHUB_EMAIL: ${{ secrets.GH_EMAIL }}
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 14 ]
+    name: "Setup"
+    steps:
+      - name: "⚙ Set up Node.js v${{ matrix.node }}"
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: "✅ Checkout repository"
+        uses: actions/checkout@v2
+
+  release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [ 14 ]
+    name: "Release"
+    needs: setup
+    steps:
+      - name: "⚙ Set up Node.js v${{ matrix.node }}"
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: "✅ Checkout repository"
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: "💾 Restore Dependencies from cache"
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+
+      - name: "📦 Install packages"
+        run: yarn install
+
+
+      - name: "👨‍💻 Run Test"
+        run: yarn test
+        env:
+          NODE_ENV: 'test'
+
+      - name: "🏷️ Create Release"
+        run: |
+          git config --global user.name "GitHub CI/CD bot"
+          git config --global user.email "${GITHUB_EMAIL}"
+          yarn release     
+          git push --follow-tags origin main
+
+      - name: "📄 Create Changelog"
+        uses: Bullrich/generate-release-changelog@master
+        id: Changelog
+        env:
+          REPO: ${{ github.repository }}
+
+      - name: "🚀 Publish Release"
+        uses: actions/create-release@v1
+        with:
+          tag_name: "v1"
+          release_name: "v1"
+          body: |
+            ${{ steps.Changelog.outputs.changelog }}
+            
+            ---
+            
+            > 💬 All notable changes to this project will be documented in [Changelog](${{ github.event.repository.html_url }}/blob/main/CHANGELOG.md) file.
+          draft: false
+          prerelease: false
+
+      - name: "🔁 Rebase"
+        run: |
+          git remote set-url origin "https://github.com/${{ github.repository }}.git"
+          git config --global user.name "GitHub CI/CD bot"
+          git config --global user.email "${GITHUB_EMAIL}"
+          git config pull.rebase true
+          git fetch
+          git checkout develop
+          git pull
+          git merge --no-ff -m "ci(rebase): merge main" origin/main
+          git push -f
+  
