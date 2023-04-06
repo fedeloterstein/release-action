@@ -57,6 +57,10 @@ yarn
 
 Copy the .github and .husky folders into your project, along with the .versionrc file.
 
+In GitHub, create two secrets and add them to your project: GH_TOKEN (created from GitHub) and GH_EMAIL (github-actions[bot]@users.noreply.github.com).
+
+Finally, don't forget to grant write permission to the actions in your repository.
+
 ## 💻 Contributing
 
 Thank you for considering contributing to this project! If you'd like to make a contribution, follow these steps:
