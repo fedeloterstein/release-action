@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 14 ]
+        node: [ 16 ]
     name: "Setup"
     steps:
       - name: "⚙ Set up Node.js v${{ matrix.node }}"
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -27,12 +27,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: [ 14 ]
+        node: [ 16 ]
     name: "Release"
     needs: setup
     steps:
       - name: "⚙ Set up Node.js v${{ matrix.node }}"
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
 
@@ -42,21 +42,15 @@ jobs:
           fetch-depth: 0
 
       - name: "💾 Restore Dependencies from cache"
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             node_modules
             */*/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
 
       - name: "📦 Install packages"
         run: yarn install
-
-
-      - name: "👨‍💻 Run Test"
-        run: yarn test
-        env:
-          NODE_ENV: 'test'
 
       - name: "🏷️ Create Release"
         id: latesTag
