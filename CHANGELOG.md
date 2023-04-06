@@ -2,6 +2,13 @@
 
 ---
 
+### [2.0.1](https://github.com/fedeloterstein/release-action/compare/v2.0.0...v2.0.1) (2023-04-06)
+
+
+### 👨‍💻 Chores
+
+* edit readme ([51e7227](https://github.com/fedeloterstein/release-action/commit/51e722750022febf190608ba9fae6d932b1b01fe))
+
 ## [2.0.0](https://github.com/fedeloterstein/release-action/compare/v1.3.0...v2.0.0) (2023-04-06)
 
 
