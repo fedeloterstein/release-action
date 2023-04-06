@@ -27,7 +27,8 @@
   "scripts": {
     "pre-commit": "lint-staged",
     "postinstall": "husky install",
-    "release": "standard-version"
+    "release": "standard-version",
+    "test": "echo 'lorem ipsum'"
   },
   "homepage": "https://github.com/fedeloterstein/release-action#readme",
   "devDependencies": {
