@@ -10,31 +10,25 @@ env:
 jobs:
   setup:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ 16 ]
     name: "Setup"
     steps:
-      - name: "⚙ Set up Node.js v${{ matrix.node }}"
+      - name: "⚙ Set up Node.js"
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: "16"
 
       - name: "✅ Checkout repository"
         uses: actions/checkout@v3
 
   release:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node: [ 16 ]
     name: "Release"
     needs: setup
     steps:
-      - name: "⚙ Set up Node.js v${{ matrix.node }}"
+      - name: "⚙ Set up Node.js"
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: "16"
 
       - name: "✅ Checkout repository"
         uses: actions/checkout@v3
