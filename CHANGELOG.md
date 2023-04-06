@@ -2,6 +2,13 @@
 
 ---
 
+## [1.3.0](https://github.com/fedeloterstein/release-action/compare/v1.2.0...v1.3.0) (2023-04-06)
+
+
+### ✨ Features
+
+* add new readme ([f1a334e](https://github.com/fedeloterstein/release-action/commit/f1a334e412b3fb36458a233cf9fef8173723f965))
+
 ## [1.2.0](https://github.com/fedeloterstein/release-action/compare/v1.1.6...v1.2.0) (2023-04-06)
 
 
