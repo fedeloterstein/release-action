@@ -1,0 +1,49 @@
+name: "Branches"
+
+on:
+  push:
+    branches: [ "feat/*", "fix/*", "refactor/*", "chore/*", "docs/*", "test/*", "build/*", "perf/*", "style/*", "revert/*" ]
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    name: "Setup"
+    steps:
+      - name: "⚙ Set up Node.js"
+        uses: actions/setup-node@v1
+        with:
+          node-version: "16"
+
+      - name: "✅ Checkout repository"
+        uses: actions/checkout@v2
+
+  build:
+    runs-on: ubuntu-latest
+    needs: setup
+    name: "Build"
+    steps:
+      - name: "⚙ Set up Node.js"
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+
+      - name: "✅ Checkout repository"
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: "💾 Restore packages from cache"
+        uses: actions/cache@v3
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: "📦 Install packages"
+        run: yarn install
+
+      - name: "👨‍💻 Run Test"
+        run: yarn test
+        env:
+          NODE_ENV: 'test'  
