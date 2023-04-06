@@ -2,6 +2,14 @@
 
 ---
 
+### [1.1.3](https://github.com/fedeloterstein/release-action/compare/v1.1.2...v1.1.3) (2023-04-06)
+
+
+### 👨‍💻 Chores
+
+* edit text ([d21f0ea](https://github.com/fedeloterstein/release-action/commit/d21f0ea508c06ee79cbf545e57b679c8c90c51a4))
+* edit worksflows ([ae5f9f6](https://github.com/fedeloterstein/release-action/commit/ae5f9f6fbfe910e0380f54ab9266a20a61b0f3cb))
+
 ### [1.1.2](https://github.com/fedeloterstein/release-action/compare/v1.1.1...v1.1.2) (2023-04-06)
 
 
