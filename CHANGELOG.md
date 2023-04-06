@@ -2,6 +2,13 @@
 
 ---
 
+## [1.2.0](https://github.com/fedeloterstein/release-action/compare/v1.1.6...v1.2.0) (2023-04-06)
+
+
+### ✨ Features
+
+* create branches workflow ([0c19146](https://github.com/fedeloterstein/release-action/commit/0c191460974ca751f78ae9c78c50095f1b59fd30))
+
 ### [1.1.6](https://github.com/fedeloterstein/release-action/compare/v1.1.5...v1.1.6) (2023-04-06)
 
 
