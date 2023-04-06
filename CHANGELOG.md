@@ -2,6 +2,13 @@
 
 ---
 
+### [1.1.1](https://github.com/fedeloterstein/release-action/compare/v1.1.0...v1.1.1) (2023-04-06)
+
+
+### 👨‍💻 Chores
+
+* edit workflow release ([5da8642](https://github.com/fedeloterstein/release-action/commit/5da86427d95ecd9edc66f7aab40cd03afbddbcda))
+
 ## 1.1.0 (2023-04-06)
 
 
